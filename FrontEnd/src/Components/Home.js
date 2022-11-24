@@ -7,6 +7,9 @@ function Home() {
       <nav>
         <Navbar />
       </nav>
+      <div>
+        HOme
+      </div>
     </div>
   )
 }

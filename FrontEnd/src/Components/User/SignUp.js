@@ -47,7 +47,7 @@ function SignUp() {
         dispatch(loginState(true))
         const Cookie = new UniversalCookie();
         Cookie.set('jwt', response.data.token, { path: '/' });
-        navigate('/')
+        navigate('/dashboard')
       }
       alert(response.data.message);
     })
@@ -170,9 +170,9 @@ function SignUp() {
                       name='purpose'
                       onChange={(e) => setPerpose(e.target.value)}
                     >
-                      <MenuItem value={"Ten"}>Ten</MenuItem>
-                      <MenuItem value={"Twenty"}>Twenty</MenuItem>
-                      <MenuItem value={"Thirty"}>Thirty</MenuItem>
+                      <MenuItem value={"Ten"}>Personal</MenuItem>
+                      <MenuItem value={"Twenty"}>Company</MenuItem>
+                      <MenuItem value={"Thirty"}>Collage</MenuItem>
                     </Select>
                   </FormControl>
                 </Grid>

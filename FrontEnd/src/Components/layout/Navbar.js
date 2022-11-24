@@ -4,15 +4,14 @@ import LOGO from '../../assets/images/logo.png';
 import { Input, Avatar, Drawer, Button, Menu, PasswordInput, Image, Text } from '@mantine/core';
 import { IconSearch, IconAlertOctagon, IconAt, IconKeyboard } from '@tabler/icons';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import UniversalCookies from 'universal-cookie';
 import { adddata } from '../../redux/UserSlice';
 import { loginState } from '../../redux/IsloginSlice'
 import { useSelector, useDispatch } from 'react-redux';
+import Home from '../Home';
 
-
-
-function Navbar() {
+function Navbar({ OnTextChange }) {
     const [openDrawer, setOpenDrawer] = useState(false);
     const [openProfile, setOpenProfile] = useState(false)
     const [email, SetEmail] = useState('');
@@ -21,6 +20,7 @@ function Navbar() {
     const dispatch = useDispatch();
     const loginData = useSelector((state) => state.islogin.value);
     const ProfileData = useSelector((state) => state.userdata.value);
+    const navigate = useNavigate();
     // useEffect(() => {
 
     // }, [])
@@ -35,6 +35,7 @@ function Navbar() {
                     dispatch(loginState(true))
                     const Cookie = new UniversalCookies();
                     Cookie.set('jwt', response.data.token, { path: '/' })
+                    navigate('/dashboard');
                 }
                 alert(response.data.message);
             }));
@@ -43,18 +44,8 @@ function Navbar() {
         <>
             <div className='flex justify-between bg-gray-600 p-5'>
                 <div>
-                    <img className=' h-20 w-20' src={LOGO} alt="logo" />
+                    <Link to='/'><img className=' h-20 w-20' src={LOGO} alt="logo" /></Link>
                 </div>
-                {loginData ? (
-                    <div className='m-2 w-96'>
-                        <Input
-                            icon={<IconSearch />}
-                            placeholder="Search Here"
-                            variant='filled'
-                        />
-                    </div>
-                ) : ""
-                }
                 {loginData ? (
                     <div>
                         <ul className='flex p-4'>
